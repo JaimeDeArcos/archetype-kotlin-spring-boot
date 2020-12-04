@@ -1,0 +1,42 @@
+
+# --
+server:
+  port: 5013
+
+# --
+spring:
+
+  application:
+    name: springboot-template
+
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: 'off'
+
+  flyway:
+    enabled: true
+    locations: classpath:/db/test-migrations
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:template_test_db;MODE=MYSQL
+    continueOnError: true
+
+  h2:
+    console.enabled: true
+
+# --
+external:
+  informationProcessor:
+    url: "http://localhost:9001"
+
+
+#--
+logging:
+  level:
+    root: WARN
+    es.jaimedearcos: WARN
+    org.flywaydb:
+      core.internal.command:
+        DbValidate: INFO
+        DbMigrate: INFO

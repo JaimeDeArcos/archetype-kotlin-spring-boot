@@ -1,0 +1,40 @@
+
+#--
+spring:
+
+  application:
+    name: springboot-template
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    schemas: ${DB_SCHEMA:template}
+    baselineOnMigrate: true
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      use-new-id-generator-mappings: false
+      ddl-auto: none
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_SCHEMA:template}?useSSL=false
+
+#--
+server:
+  port: 5000
+
+#--
+logging:
+  level:
+    root: WARN
+    es.jaimedearcos: INFO
+    org.flywaydb:
+      core.internal.command:
+        DbValidate: INFO
+        DbMigrate: INFO
+  pattern:
+    console: "[%clr(%-7.7t)] %d{yyyy-MM-dd HH:mm:ss.SSS} %clr(%-5level) %clr(%-40.40logger{0}){blue} %clr(:){red} %clr(%m){faint}%n"
