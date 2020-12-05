@@ -17,19 +17,12 @@ data class UserUpdateDto (
         var lastName : String? = null,
 
         @field:NotNull
-        @field:Size(min=6,max=256)
-        var password : String?,
-
-        @field:NotNull
         @field:Size(min=2,max=256)
         var country : String? = null,
 
         @field:NotNull
         @field:Size(min=2,max=256)
         var city : String? = null,
-
-        @field:Size(min=6,max=24)
-        var phone : String? = null,
 
         @field:Size(min=2,max=256)
         var company : String? = null,

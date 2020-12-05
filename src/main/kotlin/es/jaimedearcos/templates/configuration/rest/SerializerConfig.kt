@@ -2,6 +2,7 @@ package es.jaimedearcos.templates.configuration.rest
 
 import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.SNAKE_CASE
 import com.fasterxml.jackson.databind.SerializationFeature.FAIL_ON_EMPTY_BEANS
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
 import com.fasterxml.jackson.databind.util.StdDateFormat
@@ -30,11 +31,9 @@ class SerializerConfig {
         mapper.dateFormat = StdDateFormat().withColonInTimeZone(true)
         mapper.registerModule(JavaTimeModule())
         mapper.disable(WRITE_DATES_AS_TIMESTAMPS)
-
+        mapper.propertyNamingStrategy = SNAKE_CASE
         mapper.configure(FAIL_ON_EMPTY_BEANS, false)
         mapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
         return mapper
     }
 

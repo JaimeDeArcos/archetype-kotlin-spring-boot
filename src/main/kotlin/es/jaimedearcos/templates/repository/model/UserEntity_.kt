@@ -22,18 +22,12 @@ object UserEntity_ {
     @Volatile
     var country: SingularAttribute<UserEntity, String>? = null
     @Volatile
-    var pass: SingularAttribute<UserEntity, String>? = null
-    @Volatile
     var name: SingularAttribute<UserEntity, String>? = null
-    @Volatile
-    var phone: SingularAttribute<UserEntity, String>? = null
     @Volatile
     var email: SingularAttribute<UserEntity, String>? = null
     @Volatile
     var enabled: SingularAttribute<UserEntity, Boolean>? = null
     @Volatile
     var verified: SingularAttribute<UserEntity, Boolean>? = null
-    @Volatile
-    var changedPassword: SingularAttribute<UserEntity, Boolean>? = null
 
 }

@@ -2,6 +2,13 @@ package features
 
 import acceptance.utils.bodyTo
 import acceptance.utils.getValidResponse
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.databind.util.StdDateFormat
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import es.jaimedearcos.templates.configuration.rest.SerializerConfig
 import es.jaimedearcos.templates.controller.model.response.UserDto
 import io.cucumber.datatable.DataTable
 import io.cucumber.java8.En
@@ -16,12 +23,14 @@ class UserFlowStepDefs : En {
     private lateinit var serviceResponse: String
 
     private val TEST_BASE_URL = "http://localhost:5013/api/v1/users"
-    private val DETAIL_PATH = "/:idUser"
+    private val DETAIL_PATH = "/:email"
+    private val mapper = SerializerConfig().objectMapper()
 
     private val client = WebClient.builder()
             .baseUrl(TEST_BASE_URL)
             .defaultHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
             .build()
+
 
     init {
         Given("The user {string}") { email:String  ->
@@ -30,8 +39,7 @@ class UserFlowStepDefs : En {
 
         When("Request the user info") {
 
-            val path = DETAIL_PATH
-                    .replace(":idUser", userEmail)
+            val path = DETAIL_PATH.replace(":email", userEmail)
 
             serviceResponse = client.get().uri(path)
                     .getValidResponse()
@@ -40,14 +48,13 @@ class UserFlowStepDefs : En {
 
         Then("The info of the user is correct") { dataTable: DataTable ->
 
-            val input = dataTable.asMap<String, String>(String::class.java, String::class.java)
+            val valueMap = dataTable.asMap<String, String>(String::class.java, String::class.java)
+            val expected = mapper.readValue(mapper.writeValueAsString(valueMap), UserDto::class.java)
 
-            val userInfo = UserDto(
-                    id =  input["id"]!!.toLong(),
-                    email = input["email"] as String
-            )
+            val result = mapper.readValue(serviceResponse, UserDto::class.java)
 
-            check(userInfo.id == 1L)
+            check(expected.id == result.id)
+            check(expected.firstName == result.firstName)
         }
     }
 }

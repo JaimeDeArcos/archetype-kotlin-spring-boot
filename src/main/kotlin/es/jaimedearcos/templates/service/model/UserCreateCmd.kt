@@ -12,7 +12,6 @@ data class UserCreateCmd (
         var lastName  : String? = null,
         var country   : String? = null,
         var city      : String? = null,
-        var phone     : String? = null,
         var company   : String? = null,
         var enabled   : Boolean = false
 )

@@ -32,11 +32,11 @@ class UserServiceImpl (
 
     private val log: Logger = LoggerFactory.getLogger(UserServiceImpl::class.java)
 
-    override fun detail(mail: String): User {
-        log.debug("Retrieving user by ID - [$mail]")
-        return repository.findByEmail(mail)
+    override fun detail(email: String): User {
+        log.debug("Retrieving user by ID - [$email]")
+        return repository.findByEmail(email)
                 .map { dbMapper.toDomain(it) }
-                .orElseThrow { NotFoundException("There is no user with email - $mail")}
+                .orElseThrow { NotFoundException("There is no user with email - $email")}
     }
 
     override fun create(cmd : UserCreateCmd): User {

@@ -13,4 +13,4 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (id, email, first_name, last_name, country, city, company, enabled, verified, role) VALUES
-(1, 'test_root@gmail.com', 'Raiz', 'Rodriguez', 'España', 'Madrid', 'Verdecora', true,  true, 'ROLE_ROOT');
+(1, 'u1@gmail.com', 'Raiz', 'Rodriguez', 'España', 'Madrid', 'Verdecora', true,  true, 'ROLE_ROOT');

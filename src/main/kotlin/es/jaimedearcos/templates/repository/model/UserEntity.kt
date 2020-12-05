@@ -17,9 +17,6 @@ data class UserEntity(
         @Column(name = "email")
         var email: String? = null,
 
-        @Column(name = "password")
-        var pass: String? = null,
-
         @Column(name = "role")
         @Enumerated(STRING)
         var role: Roles = Roles.ROLE_USER,
@@ -39,16 +36,10 @@ data class UserEntity(
         @Column(name = "company")
         var company: String? = null,
 
-        @Column(name = "phone")
-        var phone: String? = null,
-
         @Column(name = "enabled")
         var enabled: Boolean = false,
 
         @Column(name = "verified")
-        var verified: Boolean = false,
-
-        @Column(name = "changed_password")
-        var changedPassword: Boolean = false
+        var verified: Boolean = false
 
 )
